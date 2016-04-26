@@ -1,4 +1,5 @@
-export default ({ region, name }) => {
-  const key = `${region.toLowerCase()}-${name.toLowerCase()}`;
-  return key;
-};
+import { getSummoner } from './lolapi';
+
+export default function ({ region, name }) {
+  return getSummoner(region, name);
+}
