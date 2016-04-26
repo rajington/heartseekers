@@ -1,13 +1,13 @@
 {
   "name": "heartseekers",
   "version": "0.0.1",
-  "description": "A Serverless Project and its Serverless Plugin dependencies.",
-  "author": "me",
+  "description": "League of Legends champion mastery data analysis tool with a \"dating site\" front-end",
+  "author": "rajington",
   "license": "MIT",
   "private": false,
   "repository": {
     "type": "git",
-    "url": "git://github.com/"
+    "url": "https://github.com/rajington/heartseekers"
   },
   "dependencies": {}
 }
