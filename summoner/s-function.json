@@ -9,7 +9,12 @@
   "memorySize": 1024,
   "authorizer": {},
   "custom": {
-    "excludePatterns": []
+    "runtime": {
+      "babel": {
+        "presets": ["es2015", "stage-0"],
+        "plugins": ["transform-async-to-generator"]
+      }
+    }
   },
   "endpoints": [
     {
