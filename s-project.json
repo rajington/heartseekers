@@ -1,5 +1,7 @@
 {
   "name": "heartseekers",
   "custom": {},
-  "plugins": []
+  "plugins": [
+    "serverless-runtime-babel"
+  ]
 }
