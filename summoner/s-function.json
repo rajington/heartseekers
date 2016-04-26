@@ -45,9 +45,7 @@
   ],
   "events": [],
   "environment": {
-    "SERVERLESS_PROJECT": "${project}",
-    "SERVERLESS_STAGE": "${stage}",
-    "SERVERLESS_REGION": "${region}"
+    "RIOT_API_KEY": "${RIOT_API_KEY}"
   },
   "vpc": {
     "securityGroupIds": [],
