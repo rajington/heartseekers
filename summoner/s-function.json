@@ -21,7 +21,10 @@
       "apiKeyRequired": false,
       "requestParameters": {},
       "requestTemplates": {
-        "application/json": ""
+        "application/json": {
+          "region": "$input.params('region')",
+          "name":"$input.params('name')"
+        }
       },
       "responses": {
         "400": {
