@@ -1,7 +1,11 @@
 import 'babel-polyfill';
-import { getSummoner } from './lolapi';
+import { getSummoner, getChampions } from './lolapi';
 
 export default async function ({ region = 'na', name }) {
   const summoner = await getSummoner(region, name);
-  return summoner;
+  const champions = await getChampions(region, summoner.id);
+  return {
+    summoner,
+    champions,
+  };
 }
