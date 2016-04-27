@@ -1,7 +1,17 @@
-export function persistSummoner(region, summoner, champions) {
-  const key = `${region.toLowerCase()}-${summoner.name}`;
+import AWS from 'aws-sdk';
+import Promise from 'bluebird';
 
-  const championsList = champions
+const docClient = new AWS.DynamoDB.DocumentClient();
+Promise.promisifyAll(docClient);
+
+function getScore(champions) {
+  return champions.reduce(
+    (total, champion) => total + champion.championPoints
+  , 0);
+}
+
+function prepareChampionsList(champions) {
+  return champions
     .map(({
       championId,
       championPoints,
@@ -15,15 +25,16 @@ export function persistSummoner(region, summoner, champions) {
       highestGrade,
       lastPlayTime,
     }));
+}
 
-  const score = champions.reduce(
-    (total, champion) => total + champion.championPoints
-  , 0);
-
-  return {
-    key,
-    id: summoner.id,
-    score,
-    championsList,
-  };
+export function persistSummoner(region, summoner, champions) {
+  return docClient.putAsync({
+    TableName: process.env.SUMMONERS_TABLE,
+    Item: {
+      key: `${region.toLowerCase()}-${summoner.name}`,
+      id: summoner.id,
+      score: getScore(champions),
+      champions: prepareChampionsList(champions),
+    },
+  });
 }
