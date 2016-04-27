@@ -50,7 +50,8 @@
   ],
   "events": [],
   "environment": {
-    "RIOT_API_KEY": "${RIOT_API_KEY}"
+    "RIOT_API_KEY": "${RIOT_API_KEY}",
+    "SUMMONERS_TABLE": "${summonersTableName}"
   },
   "vpc": {
     "securityGroupIds": [],

@@ -39,6 +39,14 @@
                 "logs:PutLogEvents"
               ],
               "Resource": "arn:aws:logs:${region}:*:*"
+            },
+            {
+              "Effect": "Allow",
+              "Action": [
+                "dynamodb:GetItem",
+                "dynamodb:PutItem"
+              ],
+              "Resource": "arn:aws:dynamodb:${region}:*:table/${project}-summoners-${stage}"
             }
           ]
         },
@@ -47,6 +55,28 @@
             "Ref": "IamRoleLambda"
           }
         ]
+      }
+    },
+    "SummonersTable": {
+      "Type": "AWS::DynamoDB::Table",
+      "Properties": {
+        "TableName": "${project}-summoners-${stage}",
+        "AttributeDefinitions": [
+          {
+            "AttributeName": "key",
+            "AttributeType": "S"
+          }
+        ],
+        "KeySchema": [
+          {
+            "AttributeName": "key",
+            "KeyType": "HASH"
+          }
+        ],
+        "ProvisionedThroughput": {
+          "ReadCapacityUnits": 25,
+          "WriteCapacityUnits": 25
+        }
       }
     }
   },
@@ -58,6 +88,12 @@
           "IamRoleLambda",
           "Arn"
         ]
+      }
+    },
+    "SummonersTableName": {
+      "Description": "Name of Summoners DynamoDB table",
+      "Value": {
+        "Ref": "SummonersTable"
       }
     }
   }
