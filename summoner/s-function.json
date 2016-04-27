@@ -18,7 +18,7 @@
   },
   "endpoints": [
     {
-      "path": "summoner",
+      "path": "summoner/{region}/{name}",
       "method": "GET",
       "type": "AWS",
       "authorizationType": "none",
@@ -34,6 +34,9 @@
       "responses": {
         "400": {
           "statusCode": "400"
+        },
+        "Not Found": {
+          "statusCode": "404"
         },
         "default": {
           "statusCode": "200",
