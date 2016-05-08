@@ -24,6 +24,7 @@
     "webpack-dev-server": "^1.14.0"
   },
   "dependencies": {
+    "history": "^2.1.1",
     "lodash": "^4.11.2",
     "material-ui": "^0.15.0-beta.2",
     "react": "^15.0.1",
