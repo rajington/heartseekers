@@ -1,41 +1,42 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset='utf-8'>
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+<!doctype html>
+<html class="no-js" lang="">
 
-    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
-    <link rel="stylesheet" type="text/css" href="stylesheets/github-dark.css" media="screen">
-    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>heartseekers - Champion Matchmaking</title>
+  <meta name="description" content="League of Legends champion matchmaker based on mastery.">
 
-    <title>Heartseekers by rajington</title>
-  </head>
+  <!-- Use minimum-scale=1 to enable GPU rasterization -->
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, user-scalable=0, maximum-scale=1, minimum-scale=1"
+  >
 
-  <body>
+  <link rel="stylesheet" type="text/css" href="main.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="shortcut icon" href="/images/favicon.ico">
+</head>
 
-    <header>
-      <div class="container">
-        <h1>Heartseekers</h1>
-        <h2>League of Legends champion mastery data analysis tool with a &quot;dating site&quot; front-end</h2>
+<body>
+  <!-- This script adds the Roboto font to our project. For more detail go to this site:  http://www.google.com/fonts#UsePlace:use/Collection:Roboto:400,300,500 -->
+  <script>
+    var WebFontConfig = {
+      google: { families: [ 'Roboto:400,300,500:latin' ] }
+    };
+    (function() {
+      var wf = document.createElement('script');
+      wf.src = ('https:' == document.location.protocol ? 'https' : 'http') +
+      '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
+      wf.type = 'text/javascript';
+      wf.async = 'true';
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(wf, s);
+    })();
+  </script>
+  <div id='app'>
+    <script src="app.js"></script>
+  </div>
+</body>
 
-        <section id="downloads">
-          <a href="https://github.com/rajington/heartseekers/zipball/master" class="btn">Download as .zip</a>
-          <a href="https://github.com/rajington/heartseekers/tarball/master" class="btn">Download as .tar.gz</a>
-          <a href="https://github.com/rajington/heartseekers" class="btn btn-github"><span class="icon"></span>View on GitHub</a>
-        </section>
-      </div>
-    </header>
-
-    <div class="container">
-      <section id="main_content">
-        <p>Find your ideal (champion) match! Using champion mastery data our dating service finds champions that are a perfect match for you, whether you're interested in something quick (getting a chest) or something more long term (finding a new main).</p>
-
-<p>Summoners enter their region and name and the service pulls their champion mastery data. They initially see their list of champions and the service recommends hooking up (getting a chest) with champions they have a high grade with (or high number of mastery points with) but haven't gotten lucky (earned a chest) with yet. </p>
-
-<p>Then their data is anonymized and aggregated against all summoner data to provide even better recommendations. Our service finds based on champions you have received a chest-worthy grade with, which other champions other summoners have received a chest-worthy grade with using simple relational data aggregation. A more advanced service using machine learning finds what type of playstyle you have based on your champion mastery level with various champions, and recommends champions that fit your playstyle that you haven't mastered yet. Finally, aggregated data is used to find the "biggest playas" (summoners with the most total mastery points) and "top power couples" (summoners with most mastery points for a specific champion).</p>
-      </section>
-    </div>
-
-    
-  </body>
 </html>
