@@ -6,7 +6,7 @@ function fetchAPI(url) {
 }
 
 function sanitize(name) {
-  return name.replace(/\s+/g, '').toLowerCase();
+  return unescape(name).replace(/ /g, '').toLowerCase();
 }
 
 export function getSummoner(region, name) {
