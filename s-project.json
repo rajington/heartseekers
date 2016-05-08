@@ -2,6 +2,13 @@
   "name": "heartseekers",
   "custom": {},
   "plugins": [
-    "serverless-runtime-babel"
-  ]
+    "serverless-runtime-babel",
+    "serverless-cors-plugin"
+  ],
+  "custom": {
+    "cors": {
+      "allowOrigin": "*",
+      "allowHeaders": ["Content-Type", "X-Amz-Date", "Authorization", "X-Api-Key"]
+    }
+  }
 }
