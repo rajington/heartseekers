@@ -3,14 +3,14 @@ import { PromiseState } from 'react-refetch';
 import connect from '../api-connector';
 import PromiseStateContainer from './PromiseStateContainer';
 
-const Summoner = ({ summonerFetch }) => (
+const Summoner = ({ summonerFetch }, { version }) => (
   <PromiseStateContainer
     ps={summonerFetch}
     onFulfillment={({ summoner, score, champions }) => (
       <div>
         <p>{summoner.name}</p>
         <p>{summoner.level}</p>
-        <img src={`http://ddragon.leagueoflegends.com/cdn/6.9.1/img/profileicon/${summoner.icon}.png`} alt="icon" />
+        <img src={`http://ddragon.leagueoflegends.com/cdn/${version}/img/profileicon/${summoner.icon}.png`} alt="icon" />
         <p>{score}</p>
         <ul>
         {
@@ -26,6 +26,10 @@ const Summoner = ({ summonerFetch }) => (
 
 Summoner.propTypes = {
   summonerFetch: React.PropTypes.instanceOf(PromiseState).isRequired,
+};
+
+Summoner.contextTypes = {
+  version: React.PropTypes.string,
 };
 
 export default connect(({ routeParams: { region, name } }) => ({
