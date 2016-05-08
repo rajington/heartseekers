@@ -1,7 +1,11 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import injectTapEventPlugin from 'react-tap-event-plugin';
-import Main from './Main'; // Our custom react component
+import { render } from 'react-dom';
+import { Router, IndexRoute, Route, browserHistory } from 'react-router';
+import App from './components/App';
+import Main from './components/Main';
+import Summoner from './components/Summoner';
+import NoMatch from './components/NoMatch';
 
 // Needed for onTouchTap
 // Can go away when react 1.0 release
@@ -9,6 +13,12 @@ import Main from './Main'; // Our custom react component
 // https://github.com/zilverline/react-tap-event-plugin
 injectTapEventPlugin();
 
-// Render the main app react component into the app div.
-// For more details see: https://facebook.github.io/react/docs/top-level-api.html#react.render
-ReactDOM.render(<Main />, document.getElementById('app'));
+render((
+  <Router history={browserHistory}>
+    <Route path="/" component={App}>
+      <IndexRoute component={Main} />
+      <Route path="/summoners/:region/:name" component={Summoner} />
+      <Route path="*" component={NoMatch} />
+    </Route>
+  </Router>
+), document.getElementById('app'));
