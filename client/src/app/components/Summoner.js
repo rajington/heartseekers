@@ -1,16 +1,21 @@
 import React from 'react';
+import { PromiseState } from 'react-refetch';
+import connect from '../api-connector';
+import PromiseStateContainer from './PromiseStateContainer';
 
-const Summoner = ({ routeParams: { region, name } }) => (
-  <h2>
-    {region} - {name}
-  </h2>
+const Summoner = ({ summonerFetch }) => (
+  <PromiseStateContainer
+    ps={summonerFetch}
+    onFulfillment={({ summoner }) => (
+      <p>{summoner.name}</p>
+    )}
+  />
 );
 
 Summoner.propTypes = {
-  routeParams: React.PropTypes.shape({
-    region: React.PropTypes.string,
-    name: React.PropTypes.string,
-  }),
+  summonerFetch: React.PropTypes.instanceOf(PromiseState).isRequired,
 };
 
-export default Summoner;
+export default connect(({ routeParams: { region, name } }) => ({
+  summonerFetch: `/summoner/${region}/${name}`,
+}))(Summoner);
