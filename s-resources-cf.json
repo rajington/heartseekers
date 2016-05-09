@@ -47,6 +47,15 @@
                 "dynamodb:PutItem"
               ],
               "Resource": "arn:aws:dynamodb:${region}:*:table/${project}-summoners-${stage}"
+            },
+            {
+              "Effect": "Allow",
+              "Action": [
+                "ec2:CreateNetworkInterface",
+                "ec2:DescribeNetworkInterfaces",
+                "ec2:DeleteNetworkInterface"
+              ],
+              "Resource": "*"
             }
           ]
         },
@@ -78,6 +87,15 @@
           "WriteCapacityUnits": 25
         }
       }
+    },
+    "HighScoresCache": {
+      "Type": "AWS::ElastiCache::CacheCluster",
+      "Properties": {
+        "Engine": "redis",
+        "CacheNodeType": "cache.t2.micro",
+        "NumCacheNodes": "1",
+        "VpcSecurityGroupIds" : [ "${defaultSecurityGroup}" ]
+      }
     }
   },
   "Outputs": {
@@ -94,6 +112,24 @@
       "Description": "Name of Summoners DynamoDB table",
       "Value": {
         "Ref": "SummonersTable"
+      }
+    },
+    "HighScoresCacheAddress": {
+      "Description": "Address of High Scores cache cluster",
+      "Value": {
+        "Fn::GetAtt": [
+          "HighScoresCache",
+          "RedisEndpoint.Address"
+        ]
+      }
+    },
+    "HighScoresCachePort": {
+      "Description": "Port of High Scores cache cluster",
+      "Value": {
+        "Fn::GetAtt": [
+          "HighScoresCache",
+          "RedisEndpoint.Port"
+        ]
       }
     }
   }

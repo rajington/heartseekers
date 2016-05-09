@@ -13,8 +13,10 @@
     "aws-sdk": "^2.2.48",
     "babel-polyfill": "^6.7.4",
     "bluebird": "^3.3.5",
+    "hiredis": "^0.4.1",
     "lodash": "^4.12.0",
     "node-fetch": "^1.5.1",
+    "redis": "^2.6.0-2",
     "serverless-cors-plugin": "^0.4.1",
     "urijs": "^1.18.0"
   },
