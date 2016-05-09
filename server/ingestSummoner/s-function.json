@@ -3,31 +3,26 @@
   "runtime": "babel",
   "description": "Serverless Lambda function for project: heartseekers",
   "customName": false,
-  "customRole": false,
+  "customRole": "${iamRoleArnLambda}",
   "handler": "handler.default",
   "timeout": 6,
   "memorySize": 1024,
   "authorizer": {},
   "custom": {
-    "excludePatterns": []
-  },
-  "endpoints": [],
-  "events": [
-    {
-      "name": "mySchedule",
-      "type": "schedule",
-      "config": {
-        "schedule": "rate(5 minutes)"
+    "runtime": {
+      "babel": {
+        "presets": ["es2015", "stage-0"],
+        "plugins": ["transform-async-to-generator"]
       }
     }
-  ],
+  },
+  "endpoints": [],
   "environment": {
-    "SERVERLESS_PROJECT": "${project}",
-    "SERVERLESS_STAGE": "${stage}",
-    "SERVERLESS_REGION": "${region}"
+    "REDIS_URL": "${highScoresCacheAddress}",
+    "REDIS_PORT": "${highScoresCachePort}"
   },
   "vpc": {
-    "securityGroupIds": [],
-    "subnetIds": []
+    "securityGroupIds": [ "${defaultSecurityGroup}" ],
+    "subnetIds": "${defaultSubnets}"
   }
 }
