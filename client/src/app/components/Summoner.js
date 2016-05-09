@@ -2,20 +2,22 @@ import React from 'react';
 import { PromiseState } from 'react-refetch';
 import connect from '../api-connector';
 import PromiseStateContainer from './PromiseStateContainer';
+import ChampionInfo from './ChampionInfo';
+import LolImg from './LolImg';
 
-const Summoner = ({ summonerFetch }, { version }) => (
+const Summoner = ({ summonerFetch }) => (
   <PromiseStateContainer
     ps={summonerFetch}
-    onFulfillment={({ summoner, score, champions }) => (
+    onFulfillment={({ summoner: { name, level, icon }, score, champions }) => (
       <div>
-        <p>{summoner.name}</p>
-        <p>{summoner.level}</p>
-        <img src={`http://ddragon.leagueoflegends.com/cdn/${version}/img/profileicon/${summoner.icon}.png`} alt="icon" />
+        <p>{name}</p>
+        <p>{level}</p>
+        <LolImg src={`/profileicon/${icon}.png`} alt={name} />
         <p>{score}</p>
         <ul>
         {
-          champions.map((champion, index) => (
-            <li key={index}>{champion.highestGrade}</li>
+          champions.map(champion => (
+            <ChampionInfo info={champion} />
           ))
         }
         </ul>
@@ -26,10 +28,6 @@ const Summoner = ({ summonerFetch }, { version }) => (
 
 Summoner.propTypes = {
   summonerFetch: React.PropTypes.instanceOf(PromiseState).isRequired,
-};
-
-Summoner.contextTypes = {
-  version: React.PropTypes.string,
 };
 
 export default connect(({ routeParams: { region, name } }) => ({
