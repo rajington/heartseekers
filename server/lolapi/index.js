@@ -53,8 +53,25 @@ export function getChampions(region, id) {
     .then(prepareChampions);
 }
 
+function prepareStaticData({ version, data }) {
+  const prepared = {
+    version,
+    champions: {},
+  };
+
+  Object.keys(data).forEach(id => {
+    const { key, name, title } = data[id];
+    prepared.champions[id] = {
+      key,
+      name,
+      title,
+    };
+  });
+
+  return prepared;
 }
 
 export function getStaticData() {
-  return fetchAPI('https://global.api.pvp.net/api/lol/static-data/na/v1.2/champion?dataById=true');
+  return fetchAPI('https://global.api.pvp.net/api/lol/static-data/na/v1.2/champion?dataById=true')
+    .then(prepareStaticData);
 }
