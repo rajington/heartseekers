@@ -1,8 +1,9 @@
+import uri from 'urijs';
 import { fetchJSON } from './fetch';
 import platforms from './platforms';
 
 function fetchAPI(url) {
-  return fetchJSON(`${url}?api_key=${process.env.RIOT_API_KEY}`);
+  return fetchJSON(uri(url).addQuery({ api_key: process.env.RIOT_API_KEY }).toString());
 }
 
 function sanitize(name) {
@@ -56,4 +57,8 @@ export function getScore(champions) {
   return champions.reduce(
     (total, champion) => total + champion.points
   , 0);
+}
+
+export function getStaticData() {
+  return fetchAPI('https://global.api.pvp.net/api/lol/static-data/na/v1.2/champion?dataById=true');
 }

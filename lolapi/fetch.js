@@ -16,6 +16,7 @@ function getJSON(response) {
 }
 
 export function fetchJSON(url) {
+  console.log(url);
   return fetch(url)
           .then(checkStatus)
           .then(getJSON);

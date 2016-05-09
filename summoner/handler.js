@@ -1,5 +1,5 @@
 import 'babel-polyfill';
-import { getSummoner, getChampions, getScore } from './lolapi';
+import { getSummoner, getChampions, getScore } from '../lolapi';
 import { persistSummoner } from './dynamodb';
 
 export default async function ({ region, name }) {
@@ -12,6 +12,7 @@ export default async function ({ region, name }) {
   return {
     summoner,
     score,
+    champions,
     result,
   };
 }
