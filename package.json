@@ -14,7 +14,8 @@
     "babel-polyfill": "^6.7.4",
     "bluebird": "^3.3.5",
     "node-fetch": "^1.5.1",
-    "serverless-cors-plugin": "^0.4.1"
+    "serverless-cors-plugin": "^0.4.1",
+    "urijs": "^1.18.0"
   },
   "devDependencies": {
     "babel-eslint": "^6.0.4",
