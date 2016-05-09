@@ -1,16 +1,21 @@
 import 'babel-polyfill';
-import { getSummoner, getChampions } from '../lolapi';
-import { persistSummoner } from './dynamodb';
+import { lookupSummoner, getChampions } from '../lolapi';
+import { getSummoner, persistSummoner } from './dynamodb';
 
 export default async function ({ region, name }) {
-  const summoner = await getSummoner(region, name);
-  const champions = await getChampions(region, summoner.id);
+  try {
+    const summoner = await lookupSummoner(region, name);
 
-  const result = await persistSummoner(region, summoner, champions);
-
-  return {
-    summoner,
-    champions,
-    result,
-  };
+    const persistedSummoner = await getSummoner(summoner);
+    if (persistedSummoner && persistedSummoner.lastUpdate === summoner.lastUpdate) {
+      return persistedSummoner;
+    }
+    summoner.champions = await getChampions(summoner);
+    await persistSummoner(summoner);
+    return summoner;
+  } catch (e) {
+    return {
+      error: e.message,
+    };
+  }
 }

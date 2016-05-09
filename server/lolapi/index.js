@@ -10,20 +10,25 @@ function sanitize(name) {
   return unescape(name).replace(/ /g, '').toLowerCase();
 }
 
-function prepareSummoner({ id, name, profileIconId, summonerLevel, revisionDate }) {
+export function getKey(summoner) {
+  return `${summoner.region.toLowerCase()}-${summoner.name}`;
+}
+
+function prepareSummoner({ id, name, profileIconId, summonerLevel, revisionDate }, region) {
   return {
     id,
     name,
+    region,
     icon: profileIconId,
     level: summonerLevel,
     lastActive: revisionDate,
   };
 }
 
-export function getSummoner(region, name) {
+export function lookupSummoner(region, name) {
   return fetchAPI(`https://${region}.api.pvp.net/api/lol/${region}/v1.4/summoner/by-name/${name}`)
     .get(sanitize(name))
-    .then(prepareSummoner);
+    .then((summoner) => prepareSummoner(summoner, region));
 }
 
 function getPlatform(region) {
@@ -47,9 +52,9 @@ function prepareChampions(champions) {
     }));
 }
 
-export function getChampions(region, id) {
-  const platform = getPlatform(region);
-  return fetchAPI(`https://${region}.api.pvp.net/championmastery/location/${platform}/player/${id}/champions`)
+export function getChampions(summoner) {
+  const platform = getPlatform(summoner.region);
+  return fetchAPI(`https://${summoner.region}.api.pvp.net/championmastery/location/${platform}/player/${summoner.id}/champions`)
     .then(prepareChampions);
 }
 
