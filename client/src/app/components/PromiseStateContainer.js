@@ -14,7 +14,6 @@ function PromiseStateContainer({ ps, onPending, onNoResults, onRejection, onFulf
   } else if (ps.fulfilled) {
     return onFulfillment(ps.value, ps.meta);
   }
-  console.log('invalid promise state', ps);
   return null;
 }
 
