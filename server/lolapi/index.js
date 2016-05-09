@@ -53,10 +53,6 @@ export function getChampions(region, id) {
     .then(prepareChampions);
 }
 
-export function getScore(champions) {
-  return champions.reduce(
-    (total, champion) => total + champion.points
-  , 0);
 }
 
 export function getStaticData() {
